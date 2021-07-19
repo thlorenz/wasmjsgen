@@ -7,12 +7,12 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
+import 'package:logging/logging.dart';
+import 'package:path/path.dart' as p;
 import 'package:wasmjsgen/src/code_generator.dart';
 import 'package:wasmjsgen/src/header_parser/data.dart';
 import 'package:wasmjsgen/src/header_parser/includer.dart';
 import 'package:wasmjsgen/src/strings.dart' as strings;
-import 'package:logging/logging.dart';
-import 'package:path/path.dart' as p;
 
 import '../clang_bindings/clang_bindings.dart' as clang_types;
 import '../data.dart';

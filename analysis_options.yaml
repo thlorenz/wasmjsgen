@@ -8,6 +8,9 @@ analyzer:
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
+  exclude:
+    - 'test_todo/'
+    - 'test/code_generator_tests/expected_bindings/'
 
 linter:
   rules:

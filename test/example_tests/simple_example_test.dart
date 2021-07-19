@@ -2,11 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:logging/logging.dart';
+import 'package:test/test.dart';
 import 'package:wasmjsgen/src/config_provider/config.dart';
 import 'package:wasmjsgen/src/header_parser.dart';
 import 'package:wasmjsgen/src/strings.dart' as strings;
-import 'package:logging/logging.dart';
-import 'package:test/test.dart';
 import 'package:yaml/yaml.dart';
 
 import '../test_utils.dart';

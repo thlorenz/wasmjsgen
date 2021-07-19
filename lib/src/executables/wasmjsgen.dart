@@ -7,8 +7,8 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:cli_util/cli_logging.dart' show Ansi;
-import 'package:wasmjsgen/wasmjsgen.dart';
 import 'package:logging/logging.dart';
+import 'package:wasmjsgen/wasmjsgen.dart';
 import 'package:yaml/yaml.dart' as yaml;
 
 final _logger = Logger('wasmjsgen.wasmjsgen');

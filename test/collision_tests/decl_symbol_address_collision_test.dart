@@ -2,9 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:wasmjsgen/src/code_generator.dart';
 import 'package:logging/logging.dart';
 import 'package:test/test.dart';
+import 'package:wasmjsgen/src/code_generator.dart';
+
 import '../test_utils.dart';
 
 late Library actual;

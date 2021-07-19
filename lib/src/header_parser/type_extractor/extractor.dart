@@ -3,10 +3,10 @@
 // BSD-style license that can be found in the LICENSE file.
 
 /// Extracts code_gen Type from type.
+import 'package:logging/logging.dart';
 import 'package:wasmjsgen/src/code_generator.dart';
 import 'package:wasmjsgen/src/header_parser/sub_parsers/typedefdecl_parser.dart';
 import 'package:wasmjsgen/src/strings.dart' as strings;
-import 'package:logging/logging.dart';
 
 import '../clang_bindings/clang_bindings.dart' as clang_types;
 import '../data.dart';

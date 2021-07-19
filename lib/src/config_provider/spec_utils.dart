@@ -4,12 +4,12 @@
 
 import 'dart:io';
 
-import 'package:wasmjsgen/src/code_generator.dart';
 import 'package:file/local.dart';
 import 'package:glob/glob.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:quiver/pattern.dart' as quiver;
+import 'package:wasmjsgen/src/code_generator.dart';
 import 'package:yaml/yaml.dart';
 
 import '../strings.dart' as strings;
