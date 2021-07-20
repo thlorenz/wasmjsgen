@@ -3,9 +3,9 @@
 # BSD-style license that can be found in the LICENSE file.
 
 name: wasmjsgen
-version: 4.0.0-dev.2
+version: 0.0.4
 homepage: https://github.com/thlorenz/wasmjsgen
-description: Generator for FFI bindings, using LibClang to parse C header files.
+description: Generator for WASM FFI bindings, using LibClang to parse C header files.
 
 environment:
   sdk: '>=2.13.0 <3.0.0'
