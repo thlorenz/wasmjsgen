@@ -1,10 +1,17 @@
 [![pub package](https://img.shields.io/pub/v/wasmjsgen.svg)](https://pub.dev/packages/wasmjsgen)
 [![Build Status](https://github.com/thlorenz/wasmjsgen/workflows/Dart%20CI/badge.svg)](https://github.com/thlorenz/wasmjsgen/actions?query=workflow%3A"Dart+CI")
-[![Coverage Status](https://coveralls.io/repos/github/thlorenz/wasmjsgen/badge.svg?branch=master)](https://coveralls.io/github/thlorenz/wasmjsgen?branch=master)
 
 Binding generator for Wasmjs flavor of [FFI](https://dart.dev/guides/libraries/c-interop) bindings.
 
 > Note: wasmjsgen only supports parsing `C` headers.
+
+**Status**: Alpha, not all features are supported, but small apps can be built with it, see
+[this example](https://thlorenz.com/rid-examples/todo_cubit).
+
+The parameter and return types share native FFI names, i.e. `Pointer<Uint8>` in order to allow
+consuming code to remain unchanged and switch from native FFI to WASM via conditional imports.
+
+_The below Readme was modified from the _ffigen_ Readme and hasn't been fully updated yet_.
 
 ## Example
 
@@ -15,29 +22,58 @@ int sum(int a, int b);
 Add configurations to Pubspec File:
 ```yaml
 wasmjsgen:
+  allocate: 'my_malloc'
   output: 'generated_bindings.dart'
   headers:
     entry-points:
       - 'example.h'
 ```
+
+**NOTE**: that wasmjsgen adds _allocate_, _dealloate_ and _reallocate_ functions that are used
+to manage memory. At the very least you will need to specify _allocate` if you want to send
+`String`s from Dart to Wasm.
+
 Output (_generated_bindings.dart_).
 ```dart
 class NativeLibrary {
-  final Pointer<T> Function<T extends NativeType>(String symbolName)
-      _lookup;
-  NativeLibrary(DynamicLibrary dynamicLibrary)
-      : _lookup = dynamicLibrary.lookup;
-  NativeLibrary.fromLookup(
-      Pointer<T> Function<T extends NativeType>(String symbolName)
-          lookup)
-      : _lookup = lookup;
-
-  int sum(int a, int b) {
-    return _sum(a, b);
+  /// The symbol lookup function.
+  T lookup<T>(String name) {
+    return _wasmInstance.functions[name] as T;
   }
 
-  late final _sumPtr = _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32, ffi.Int32)>>('sum');
-  late final _sum = _sum_ptr.asFunction<int Function(int, int)>();
+  wasm_interop.Memory get memory {
+    return _wasmInstance.memories['memory']!;
+  }
+
+  dart_typed.Uint8List get memView {
+    return _wasmInstance.memories['memory']!.buffer.asUint8List();
+  }
+
+  [ .. ]
+  
+  // --- dividePercision ---
+  /// Divides 2 floats, returns a pointer to double.
+  Pointer<Double> dividePercision(
+    Pointer<Float> a,
+    Pointer<Float> b,
+  ) {
+    return Pointer.fromAddress(
+      Double(
+        _dividePercision(
+          a.address,
+          b.address,
+        ),
+      ),
+    );
+  }
+
+  late final int Function(
+    int,
+    int,
+  ) _dividePercision = lookup('dividePercision');
+  
+  [ .. ]
+  
 }
 ```
 ## Using this package
