@@ -1,3 +1,8 @@
+# 0.0.4
+
+- first wasmjsgen alpha version
+- change log below is from ffigen
+
 # 4.0.0-dev.2
 - Added config key `functions -> expose-typedefs` to expose the typedef
 to Native and Dart type.
